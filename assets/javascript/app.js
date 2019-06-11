@@ -1,6 +1,28 @@
+// variables
 var topics = ["dog", "bunny", "cat", "sloth"];
 var limit = 10;
 var rating = "PG";
+
+function displayGif() {
+    let topic = $(this).attr("data-name");
+    let queryURL = `https://api.giphy.com/v1/gifs/search?q=${topic}&api_key=DAAX1HYTh03ajx2O56tI7GMkOOzyc778`;
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        console.log(response);
+
+    })
+
+
+};
+
+
+// $(".button").on("click", function() {
+//     let name = $(this).data("name");
+//     console.log(name);
+// })
 
 function makeButtons() {
 
@@ -9,90 +31,72 @@ function makeButtons() {
     // looping through array of topics & adding dynamic buttons
     for (let i = 0; i < topics.length; i++) {
         let newBtn = $("<button>");
-        newBtn.addClass("btn");
+        newBtn.addClass("gif-btn");
         newBtn.attr("data-name", topics[i]);
         newBtn.text(topics[i]);
         $(".buttons-container").append(newBtn);
     }
 }
 
-makeButtons();
-
 // when gif is clicked
 $("#add-animal").on("click", function(event) {
     event.preventDefault();
 
     // storing input from user input
-    let gif = $("#inlineFormInput").val().trim();
+    let topic = $("#inlineFormInput").val().trim();
 
     // adding new gif to topics array
-    topics.push(gif);
+    topics.push(topic);
 
     makeButtons();
 
 })
 
+$(document).on("click", "gif-btn", displayGif);
+makeButtons();
 
 
-// $("#add-animal").on("click", function(event) {
-//         event.preventDefault();
+
+// function generateGifs() {
+
+//     $(newBtn).on("click", function() {
+
+//         let gif = $(this).attr("data-name");
+
+//         let queryURL = `https://api.giphy.com/v1/gifs/search?q=${gif}&api_key=DAAX1HYTh03ajx2O56tI7GMkOOzyc778`;
+//         // let queryURL = `https://api.giphy.com/v1/gifs/search?&q=${gif}&api_key=DAAX1HYTh03ajx2O56tI7GMkOOzyc778&limit= ${limit}&offset=0&rating=${rating}&lang=en`;
+
+//         $.ajax({
+//             url: queryURL,
+//             method: "GET"
+//         })
+
+
 //     })
-//     // renders the page for returned gifs
-// let gifsView = () => {
 
-//     let gif = $(this).attr("data-name");
-
-//     let queryURL = `https://api.giphy.com/v1/gifs/search?&api_key=ynFTVfkAwz3tDpsyIcbVdgE1bI5lyqtd&tag=${gif}`;
-
-//     let query = "https://api.giphy.com/v1/gifs/trending?api_key=ynFTVfkAwz3tDpsyIcbVdgE1bI5lyqtd&limit=25&rating=G";
-
-//     // ajax call for specific button clicked
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-
-//     }).then(function(response) {
+//     .then(function(response) {
 //         console.log(response);
 
+
+//         let animalURL = response.data.image_original_url;
+
+//         let gifImg = $("<img>");
+
+//         gifImg.attr("src", animalURL);
+//         gifImg.attr("alt", "animal gif");
+
+//         $("#images").prepend(gifImg);
 //     })
-
-//     // array of topics
-//     var topics = ['dog', 'monkey', 'cat', 'bird'];
-
-
-//     $(".info").empty();
-
-
-//     // FUNCTIONS
-
-//     function gifButtons() {
-
-//         $(".buttons").empty();
-
-//         // looping through topics
-//         for (let i = 0; i < topics.length; i++) {
-
-//             let gifBtn = $("<button>");
-
-//             gifBtn.attr("class", "button-gif");
-
-//             gifBtn.attr("data-name", topics[i]);
-
-//             gifBtn.text(topics[i]);
-
-
-//             $(".buttons").append(gifBtn);
-
-//         }
-//     }
-
-
-
 
 // }
 
-// //CREATES AN EVENT LISTENER FOR WHEN USER CLICKS ON submit button, CB THIS FUNC
-// $("#button-addon2").on("click", function() {
 
 
+
+
+// $(document).ready(function() {
+//     $()
 // })
+// // on("click", "newBtn", generateGifs);
+
+// makeButtons();
