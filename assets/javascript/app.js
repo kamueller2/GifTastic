@@ -3,9 +3,14 @@ var limit = 10;
 var rating = "PG";
 
 function makeButtons() {
+
+    $(".buttons-container").empty();
+
+    // looping through array of topics & adding dynamic buttons
     for (let i = 0; i < topics.length; i++) {
         let newBtn = $("<button>");
         newBtn.addClass("btn");
+        newBtn.attr("data-name", topics[i]);
         newBtn.text(topics[i]);
         $(".buttons-container").append(newBtn);
     }
@@ -13,8 +18,19 @@ function makeButtons() {
 
 makeButtons();
 
+// when gif is clicked
+$("#add-animal").on("click", function(event) {
+    event.preventDefault();
 
+    // storing input from user input
+    let gif = $("#inlineFormInput").val().trim();
 
+    // adding new gif to topics array
+    topics.push(gif);
+
+    makeButtons();
+
+})
 
 
 
