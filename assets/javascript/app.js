@@ -1,1 +1,1 @@
-let topics = [];
+let topics = ['dog', 'monkey', 'cat', 'bird'];
