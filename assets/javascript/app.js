@@ -5,12 +5,12 @@ var rating = "PG";
 
 function displayGif() {
     let topic = $(this).attr("data-name");
-    let queryURL = `https://api.giphy.com/v1/gifs/search?q=${topic}&api_key=DAAX1HYTh03ajx2O56tI7GMkOOzyc778`;
+    let queryURL = "https://api.giphy.com/v1/gifs/search?q=funny+dog&api_key=DAAX1HYTh03ajx2O56tI7GMkOOzyc778";
 
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).done(function(response) {
         console.log(response);
 
     })
